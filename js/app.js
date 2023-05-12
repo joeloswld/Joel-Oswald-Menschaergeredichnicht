@@ -2,6 +2,7 @@ var _a, _b;
 import { generateAllCols } from './setup.js';
 import * as game from './game.js';
 generateAllCols();
+const startFields = { "red": 0, "blue": 10, "black": 21, "green": 31 };
 const startGame = () => {
     const playerAmount = document.getElementById('spieler-zahl');
     const num = Number.parseInt(playerAmount.value);
@@ -9,7 +10,16 @@ const startGame = () => {
     if (commands !== null) {
         commands.forEach(execStatement);
     }
+    for (let key in startFields) {
+        const el = document.getElementById(`field-${startFields[key]}`);
+        el.classList.add(`start-${key}`);
+    }
 };
+document.addEventListener("keydown", (ev) => {
+    if (ev.altKey) {
+        game.testState().forEach(execStatement);
+    }
+});
 const roll = () => {
     const n = game.rolled();
     const el = document.getElementById('die1');
@@ -33,11 +43,6 @@ function moveHome() {
         res.forEach(execStatement);
         game.changeRound();
     }
-    else {
-        if (!game.canPlayerMove()) {
-            game.changeRound();
-        }
-    }
 }
 function move() {
     const field = Number.parseInt(this.id.split('-')[1]);
@@ -46,10 +51,17 @@ function move() {
         res.forEach(execStatement);
         game.changeRound();
     }
-    else {
-        if (!game.canPlayerMove()) {
-            game.changeRound();
-        }
+}
+function moveGoal() {
+    const parts = this.id.split("-");
+    const field = Number.parseInt(parts[2]);
+    const color = parts[1];
+    const res = game.MoveFromGoal(field, color);
+    if (res !== null) {
+        res.forEach(execStatement);
+    }
+    if (game.checkWin()) {
+        alert(`${color} Player won`);
     }
 }
 const execStatement = (obj) => {
@@ -68,4 +80,7 @@ document
 document
     .querySelectorAll('.home')
     .forEach((el) => el.addEventListener('click', moveHome));
+document
+    .querySelectorAll(".goal")
+    .forEach((el) => el.addEventListener('click', moveGoal));
 //# sourceMappingURL=app.js.map
