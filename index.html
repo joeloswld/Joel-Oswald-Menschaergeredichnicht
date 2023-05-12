@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet" />
+
+<style type="text/css">
+div.dice{
+  float: left;
+  color: white;
+  width: 32px;
+  height: 32px;
+  background: dodgerblue;
+  border: none;
+  padding: 10px;
+  font-size: 24px;
+  text-align: center;
+  margin: 5px;
+}
+</style>
+
+  </head>
+  <body>
+    <header>
+      <div class="header">
+      <h1>Mensch ärgere dich nicht</h1>
+    </div>
+  </header>
+    <div id="game-starter">
+      <label for="spieler-zahl">Spielerzahl: </label>
+      <input type="number" id="spieler-zahl" />
+      <button id="game-start">Starten</button>
+    </div>
+    <div>
+      <h4 id="p-round"></h4>
+    </div>
+    <div class="grid-container-container">
+      <div class="grid-container" id="container"></div>
+      <div id="die1" class="dice">0</div>
+      <button id="roll">Würfeln</button>
+    </div>
+
+
+
+
+<div class="spielregeln">
+<details>
+  <summary>Spielregeln</summary>
+  <p>
+    - Man benötigt mindestens 2 Spieler <br>
+    - Rot fängt an <br>
+    - Anfangs 3 Versuche um eine "6" zu würfeln <br>
+    - Erstes Team, welches alle Figuren gesichert hat, gewinnt! <br>
+    <p>Viel Spaß beim Spielen!</p>
+
+  </p>
+</details>
+</div>
+<!--
+    <div id="die2" class="dice">0</div>
+    <button onclick="rollDice()">Würfeln</button>
+    <h2 id="status" style="clear: left;"></h2>-->
+  </body>
+    <script type="module" src="js/app.js" defer></script>
+</html>
